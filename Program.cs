@@ -31,10 +31,12 @@ internal class Program
         Console.SetCursorPosition(origCol, origRow);
 
         bool goal = false;
+        long seconds = 0;
         int copyCol = 0;
         int copyRow = 0;
         do
         {
+            seconds = stopwatch.ElapsedMilliseconds/1000;
             //copies of the original row and column values in case moving is invalid
             copyCol = origCol;
             copyRow = origRow;
@@ -68,8 +70,10 @@ internal class Program
         while(goal);
 
         Console.WriteLine();
+        stopwatch.Stop();
         Console.Clear();
         Console.WriteLine("Congratulations! You reached the end of the maze!!!");
+        Console.WriteLine($"It took you {seconds} seconds to complete!");
     }
     static void programIntro()
     {
