@@ -16,25 +16,45 @@
         }
         Console.SetCursorPosition(origCol, origRow);
         bool goal = false;
+        bool changedCol = false;
+        bool changedRow = false;
+        int copyCol = 0;
+        int copyRow = 0;
         do
         {
+            copyCol = origCol;
+            copyRow = origRow;
             switch(Console.ReadKey(true).Key)
             {
                 case ConsoleKey.UpArrow:
                     origRow--;
+                    changedRow = true;
+                    changedCol = false;
                     break;
                 case ConsoleKey.DownArrow:
                     origRow++;
+                    changedRow = true;
+                    changedCol = false;
                     break;
                 case ConsoleKey.LeftArrow:
                     origCol--;
+                    changedRow = false;
+                    changedCol = true;
                     break;
                 case ConsoleKey.RightArrow:
                     origCol++;
+                    changedRow = false;
+                    changedCol = true;
                     break;
             }
             if(tryMove(mapRows, origCol, origRow))
             {
+                Console.SetCursorPosition(origCol, origRow);
+            }
+            else if(changedCol || changedRow)
+            {
+                origCol = copyCol;
+                origRow = copyRow;
                 Console.SetCursorPosition(origCol, origRow);
             }
             goal = reachedGoal(mapRows, origCol, origRow);
@@ -59,9 +79,11 @@
     }
     static bool tryMove(string[] map, int col, int row)
     {
-        if(row >= 0 && (row < Console.BufferHeight || row < map.Length) && (col >= 0 && col < Console.BufferWidth))
-            return true;
-        return false;
+        if(map[row][col].Equals('#'))
+        {
+            return false;
+        }
+        return true;
     }
     static string[] mapChoice(int randNum)
     {
