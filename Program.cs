@@ -2,12 +2,12 @@
 {
     private static void Main(string[] args)
     {
-        int origRow = Console.CursorTop;
-        int origCol = Console.CursorLeft;
         string[] mapRows = File.ReadAllLines("map.txt");
         programIntro();
         Console.ReadKey();
         Console.Clear();
+        int origRow = Console.CursorTop;
+        int origCol = Console.CursorLeft;
         foreach(string row in mapRows)
         {
             Console.WriteLine(row);
