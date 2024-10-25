@@ -2,7 +2,9 @@
 {
     private static void Main(string[] args)
     {
-        string[] mapRows = File.ReadAllLines("map.txt");
+        Random rand = new Random();
+        int randMapNum = rand.Next(1,6);
+        string[] mapRows = mapChoice(randMapNum);
         programIntro();
         Console.ReadKey();
         Console.Clear();
@@ -31,11 +33,16 @@
                     origCol++;
                     break;
             }
-            Console.SetCursorPosition(origCol, origRow);
+            if(tryMove(mapRows, origCol, origRow))
+            {
+                Console.SetCursorPosition(origCol, origRow);
+            }
             goal = reachedGoal(mapRows, origCol, origRow);
         }
         while(goal);
         Console.WriteLine();
+        Console.Clear();
+        Console.WriteLine("Congratulations! You reached the end of the maze!!!");
     }
     static void programIntro()
     {
@@ -49,5 +56,34 @@
             return false;
         }
         return true;
+    }
+    static bool tryMove(string[] map, int col, int row)
+    {
+        if(row >= 0 && (row < Console.BufferHeight || row < map.Length) && (col >= 0 && col < Console.BufferWidth))
+            return true;
+        return false;
+    }
+    static string[] mapChoice(int randNum)
+    {
+        string[] map = new string[6];
+        switch(randNum)
+        {
+            case 1:
+                map = File.ReadAllLines("map1.txt");
+                break;
+            case 2:
+                map = File.ReadAllLines("map2.txt");
+                break;
+            case 3:
+                map = File.ReadAllLines("map3.txt");
+                break;
+            case 4:
+                map = File.ReadAllLines("map4.txt");
+                break;
+            default:
+                map = File.ReadAllLines("map5.txt");
+                break;
+        }
+        return map;
     }
 }
