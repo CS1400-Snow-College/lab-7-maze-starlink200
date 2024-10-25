@@ -13,7 +13,8 @@
             Console.WriteLine(row);
         }
         Console.SetCursorPosition(origCol, origRow);
-        for(int i = 0; i < 20; i++)
+        bool goal = false;
+        do
         {
             switch(Console.ReadKey(true).Key)
             {
@@ -31,11 +32,22 @@
                     break;
             }
             Console.SetCursorPosition(origCol, origRow);
+            goal = reachedGoal(mapRows, origCol, origRow);
         }
+        while(goal);
+        Console.WriteLine();
     }
     static void programIntro()
     {
         Console.WriteLine("This program will present a maze for you to move through using directional arrows, your goal is to reach the *");
         Console.WriteLine("Goodluck! Press any button to continue");
+    }
+    static bool reachedGoal(string[] map, int col, int row)
+    {
+        if(map[row][col].Equals('*'))
+        {
+            return false;
+        }
+        return true;
     }
 }
