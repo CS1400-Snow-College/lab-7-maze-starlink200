@@ -1,13 +1,27 @@
-﻿internal class Program
+﻿/***********************
+* Caleb Roskelley
+* Lab 7 Maze
+* Date Started: 10/23
+* Date Finished:
+***********************/
+
+using System.Reflection.Metadata;
+using System.Diagnostics;
+internal class Program
 {
+
     private static void Main(string[] args)
     {
+        Stopwatch stopwatch = new Stopwatch();
         Random rand = new Random();
         int randMapNum = rand.Next(1,6);
         string[] mapRows = mapChoice(randMapNum);
+
         programIntro();
         Console.ReadKey();
+        stopwatch.Start();
         Console.Clear();
+
         int origRow = Console.CursorTop;
         int origCol = Console.CursorLeft;
         foreach(string row in mapRows)
@@ -15,43 +29,35 @@
             Console.WriteLine(row);
         }
         Console.SetCursorPosition(origCol, origRow);
+
         bool goal = false;
-        bool changedCol = false;
-        bool changedRow = false;
         int copyCol = 0;
         int copyRow = 0;
         do
         {
+            //copies of the original row and column values in case moving is invalid
             copyCol = origCol;
             copyRow = origRow;
             switch(Console.ReadKey(true).Key)
             {
                 case ConsoleKey.UpArrow:
                     origRow--;
-                    changedRow = true;
-                    changedCol = false;
                     break;
                 case ConsoleKey.DownArrow:
                     origRow++;
-                    changedRow = true;
-                    changedCol = false;
                     break;
                 case ConsoleKey.LeftArrow:
                     origCol--;
-                    changedRow = false;
-                    changedCol = true;
                     break;
                 case ConsoleKey.RightArrow:
                     origCol++;
-                    changedRow = false;
-                    changedCol = true;
                     break;
             }
             if(tryMove(mapRows, origCol, origRow))
             {
                 Console.SetCursorPosition(origCol, origRow);
             }
-            else if(changedCol || changedRow)
+            else
             {
                 origCol = copyCol;
                 origRow = copyRow;
@@ -60,6 +66,7 @@
             goal = reachedGoal(mapRows, origCol, origRow);
         }
         while(goal);
+
         Console.WriteLine();
         Console.Clear();
         Console.WriteLine("Congratulations! You reached the end of the maze!!!");
@@ -77,9 +84,15 @@
         }
         return true;
     }
+    //tests to make sure that where the user wants to go is valid
+    //can't go past the top or bottom of maze and can't go to the left or right of the maze
     static bool tryMove(string[] map, int col, int row)
     {
         if(map[row][col].Equals('#'))
+        {
+            return false;
+        }
+        if(col < 0 || col > Console.BufferWidth ||  row < 0 || row > Console.BufferHeight)
         {
             return false;
         }
