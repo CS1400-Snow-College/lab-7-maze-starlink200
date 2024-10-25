@@ -69,19 +69,19 @@
         switch(randNum)
         {
             case 1:
-                map = File.ReadAllLines("map1.txt");
+                map = File.ReadAllLines("map-options/map1.txt");
                 break;
             case 2:
-                map = File.ReadAllLines("map2.txt");
+                map = File.ReadAllLines("map-options/map2.txt");
                 break;
             case 3:
-                map = File.ReadAllLines("map3.txt");
+                map = File.ReadAllLines("map-options/map3.txt");
                 break;
             case 4:
-                map = File.ReadAllLines("map4.txt");
+                map = File.ReadAllLines("map-options/map4.txt");
                 break;
             default:
-                map = File.ReadAllLines("map5.txt");
+                map = File.ReadAllLines("map-options/map5.txt");
                 break;
         }
         return map;
