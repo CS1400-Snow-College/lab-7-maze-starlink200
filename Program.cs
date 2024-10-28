@@ -36,7 +36,6 @@ internal class Program
         int copyRow = 0;
         do
         {
-            seconds = stopwatch.ElapsedMilliseconds/1000;
             //copies of the original row and column values in case moving is invalid
             copyCol = origCol;
             copyRow = origRow;
@@ -69,9 +68,11 @@ internal class Program
         }
         while(goal);
 
+        seconds = stopwatch.ElapsedMilliseconds/1000;
         Console.WriteLine();
         stopwatch.Stop();
         Console.Clear();
+
         Console.WriteLine("Congratulations! You reached the end of the maze!!!");
         Console.WriteLine($"It took you {seconds} seconds to complete!");
     }
@@ -80,6 +81,7 @@ internal class Program
         Console.WriteLine("This program will present a maze for you to move through using directional arrows, your goal is to reach the *");
         Console.WriteLine("Goodluck! Press any button to continue");
     }
+
     static bool reachedGoal(string[] map, int col, int row)
     {
         if(map[row][col].Equals('*'))
@@ -88,6 +90,7 @@ internal class Program
         }
         return true;
     }
+
     //tests to make sure that where the user wants to go is valid
     //can't go past the top or bottom of maze and can't go to the left or right of the maze
     static bool tryMove(string[] map, int col, int row)
@@ -102,9 +105,12 @@ internal class Program
         }
         return true;
     }
+    
+    //method to randomly select one of the map choices
     static string[] mapChoice(int randNum)
     {
         string[] map = new string[6];
+        /*
         switch(randNum)
         {
             case 1:
@@ -114,7 +120,7 @@ internal class Program
                 map = File.ReadAllLines("map-options/map2.txt");
                 break;
             case 3:
-                map = File.ReadAllLines("map-options/map3.txt");
+                map = File.ReadAllLines($"map-options/map3.txt");
                 break;
             case 4:
                 map = File.ReadAllLines("map-options/map4.txt");
@@ -123,6 +129,8 @@ internal class Program
                 map = File.ReadAllLines("map-options/map5.txt");
                 break;
         }
+        */
+        map = File.ReadAllLines($"map-options/map{randNum}.txt");
         return map;
     }
 }
