@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("lab-7-maze-starlink200")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5b7d7ee754d515e0c3be347b441e499fe1b0daad")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+368a702c169401260bc53fe5cc6162b553b6069b")]
 [assembly: System.Reflection.AssemblyProductAttribute("lab-7-maze-starlink200")]
 [assembly: System.Reflection.AssemblyTitleAttribute("lab-7-maze-starlink200")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

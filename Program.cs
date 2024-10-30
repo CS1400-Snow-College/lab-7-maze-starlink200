@@ -7,6 +7,7 @@
 
 using System.Reflection.Metadata;
 using System.Diagnostics;
+using System.Security.Principal;
 internal class Program
 {
 
@@ -16,21 +17,22 @@ internal class Program
         Random rand = new Random();
         int randMapNum = rand.Next(1,6);
         string[] mapRows = mapChoice(randMapNum);
+        
 
         programIntro();
         Console.ReadKey();
         stopwatch.Start();
         Console.Clear();
 
-        int origRow = Console.CursorTop;
-        int origCol = Console.CursorLeft;
+        int origRow = Console.CursorTop + 1;
+        int origCol = Console.CursorLeft + 1;
         foreach(string row in mapRows)
         {
             Console.WriteLine(row);
         }
         Console.SetCursorPosition(origCol, origRow);
 
-        bool goal = false;
+        bool goalNotReached = false;
         long seconds = 0;
         int copyCol = 0;
         int copyRow = 0;
@@ -64,9 +66,9 @@ internal class Program
                 origRow = copyRow;
                 Console.SetCursorPosition(origCol, origRow);
             }
-            goal = reachedGoal(mapRows, origCol, origRow);
+            goalNotReached = reachedGoal(mapRows, origCol, origRow);
         }
-        while(goal);
+        while(goalNotReached);
 
         seconds = stopwatch.ElapsedMilliseconds/1000;
         Console.WriteLine();
@@ -99,14 +101,15 @@ internal class Program
         {
             return false;
         }
-        if(col < 0 || col > Console.BufferWidth ||  row < 0 || row > Console.BufferHeight)
+
+        if(col == -1 ||  row < 0)
         {
             return false;
         }
         return true;
     }
     
-    //method to randomly select one of the map choices
+    //method to randomly select one of the map choicesS
     static string[] mapChoice(int randNum)
     {
         string[] map = new string[6];
