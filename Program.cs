@@ -113,26 +113,6 @@ internal class Program
     static string[] mapChoice(int randNum)
     {
         string[] map = new string[6];
-        /*
-        switch(randNum)
-        {
-            case 1:
-                map = File.ReadAllLines("map-options/map1.txt");
-                break;
-            case 2:
-                map = File.ReadAllLines("map-options/map2.txt");
-                break;
-            case 3:
-                map = File.ReadAllLines($"map-options/map3.txt");
-                break;
-            case 4:
-                map = File.ReadAllLines("map-options/map4.txt");
-                break;
-            default:
-                map = File.ReadAllLines("map-options/map5.txt");
-                break;
-        }
-        */
         map = File.ReadAllLines($"map-options/map{randNum}.txt");
         return map;
     }
